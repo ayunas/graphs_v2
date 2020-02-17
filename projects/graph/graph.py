@@ -26,15 +26,52 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        return self.vertices[vertex_id]
+        neighbors = []
+
+        for n in self.vertices[vertex_id]:
+            neighbors.append(n)
+        
+        return neighbors
        
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
+        #1. add neighbors of starting_vertex to queue
+        #2. mark starting node as explored:
+        # visited = [False]*len(self.vertices)
+        #3. While the queue has vertices
+        #4. pop off (dequeue) oldest node from queue. which is the neighbor of starting_vertex.
+        #5. check if vertex is visited. 
+        #6. add vertex to visited array
+        #7. get the neighbors of the current vertex and add them to the queue
         """
-        pass  # TODO
+        queue = Queue()
+        # visited = [False]*len(self.vertices)
+        # visited[0] = True #starting node is visited
+
+        visited = [starting_vertex]
+        
+        neighbors = self.get_neighbors(starting_vertex)
+
+        for n in neighbors:
+            queue.enqueue(n)
+        
+        while queue.size > 0:
+            vert = queue.dequeue()
+            print('vert', vert)
+            if vert not in visited:
+                visited.append(vert)
+                vert_neighbors = self.get_neighbors(vert)
+                print('vert_neighbors', vert_neighbors)
+                for vn in vert_neighbors:
+                    queue.enqueue(vn)
+        
+        return visited
+
+
+
 
     def dft(self, starting_vertex):
         """
@@ -104,6 +141,10 @@ if __name__ == '__main__':
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
     print(graph.vertices)
+
+    bft = graph.bft(1)
+    print(bft)
+
 
     '''
     Valid BFT paths:
