@@ -138,9 +138,6 @@ class Graph:
                 n_path = list(path)
                 n_path.append(n)
                 queue.enqueue(n_path)
-        
-
-
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -165,6 +162,12 @@ class Graph:
                     n_path = list(path)
                     n_path.append(n)
                     stack.push(n_path)
+    
+    def dfs_helper(self,v,visited,path):
+        new_path = list(path)
+        visited.add(v)
+        new_path.append(v)
+        visited =self.dfs_helper()
 
     def dfs_recursive(self, starting_vertex):
         """
@@ -174,7 +177,10 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        visited = set()
+        path = []
+        dfs = self.dfs_helper(starting_vertex,visited,path)
+
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
