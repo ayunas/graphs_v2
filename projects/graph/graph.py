@@ -19,6 +19,11 @@ class Graph:
         """
         Add a directed edge to the graph.
         """
+        if v1 not in self.vertices:
+            self.add_vertex(v1)
+        if v2 not in self.vertices:
+            self.add_vertex(v2)
+
         self.vertices[v1].add(v2)
         return self.vertices[v1]
 
@@ -180,6 +185,8 @@ class Graph:
         visited = set()
         path = []
         dfs = self.dfs_helper(starting_vertex,visited,path)
+    def __repr__(self):
+        return str(self.vertices)
 
 
 if __name__ == '__main__':
