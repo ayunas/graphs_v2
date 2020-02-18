@@ -11,15 +11,22 @@ class LinkedPair:
 class LinkedList:
     def __init__(self,head=None):
         self.head = None if head == None else LinkedPair(head)
+        self.tail = None if head == None else self.head
     
     def tails(self,val):
         if self.head == None:
             self.head = LinkedPair(val)
+            self.tail = self.head
             return self.head
-        node = self.head
-        while node.next:
-            node = node.next
-        node.next = LinkedPair(val)
+        else:
+            self.tail.next = LinkedPair(val)
+            self.tail = self.tail.next
+            return self.tail
+        # node = self.head
+        # while node.next:
+        #     node = node.next
+        # node.next = LinkedPair(val)
+        # self.tail = node
     
     def heads(self,val):
         new_head = LinkedPair(val)
@@ -91,5 +98,7 @@ if __name__ == '__main__':
     q.enqueue(50)
     q.dequeue()
     q.enqueue(11)
+    q.enqueue(16)
+    q.dequeue()
 
     print(q)
