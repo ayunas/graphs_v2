@@ -22,10 +22,13 @@ def earliest_ancestor(ancestors, start):
         paths.append(dfs_path)
     
     valid_paths = [p for p in paths if p is not None and len(p) > 1]
-    longest_path = max(valid_paths, key=len)
-    
-    print(longest_path)
+    if len(valid_paths):
+        longest_path = max(valid_paths, key=len)
+        return longest_path[-1]
+    else:
+        return -1
 
-ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
-
-earliest_ancestor(ancestors,1)
+if __name__ == '__main__':
+    ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
+    a = earliest_ancestor(ancestors,5)
+    print(a)
