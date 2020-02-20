@@ -59,9 +59,9 @@ class SocialGraph:
 
         # Create friendships
         for u in self.users:
-            friend_count = random.randint(1,2*friends-1)
-            print('fc',friend_count, end=' ')
+            friend_count = random.randint(0,2*friends)
             # friend_count = random.randint(1,3)
+            # print('fc',friend_count, end=' ')
             for i in range(friend_count):
                 network = [user for user in self.users if user != u]
                 friend_id = random.choice(network)
@@ -85,8 +85,8 @@ class SocialGraph:
 if __name__ == '__main__':
     sg = SocialGraph()
     sg.populate_graph(10, 2)
-    print(sg.users,'\n')
-    print(sg.friendships)
+    print('users: ', sg.users,'\n')
+    print('friendship per user_id', sg.friendships)
     # print(sg.friendships)
     # connections = sg.get_all_social_paths(1)
     # print(connections)
